@@ -1,0 +1,37 @@
+-- ============================================
+-- 01_create_tables.sql
+-- Creates the core tables for the project
+-- ============================================
+
+CREATE TABLE accounts (
+    account_id VARCHAR(20) PRIMARY KEY,
+    account_type VARCHAR(20) DEFAULT 'Current',
+    opened_date DATE,
+    status VARCHAR(20) DEFAULT 'Active'
+);
+
+CREATE TABLE transactions (
+    txn_id BIGSERIAL PRIMARY KEY,
+    account_id VARCHAR(20) NOT NULL REFERENCES accounts(account_id),
+    txn_date DATE,
+    value_date DATE,
+    txn_details TEXT,
+    chq_no VARCHAR(30),
+    withdrawal_amt NUMERIC(14,2),
+    deposit_amt NUMERIC(14,2),
+    balance_amt NUMERIC(14,2)
+);
+
+CREATE TABLE customers (
+    customer_id SERIAL PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    phone VARCHAR(15),
+    email VARCHAR(100),
+    city VARCHAR(50)
+);
+
+CREATE TABLE branches (
+    branch_id SERIAL PRIMARY KEY,
+    branch_name VARCHAR(100) NOT NULL,
+    city VARCHAR(50)
+);
